@@ -51,7 +51,7 @@
     "mkdirp": "^0.5.1",
     "mockjs": "^1.0.1-beta3",
     "moment": "^2.17.1",
-    "mongoose": "4.7.6",
+    "mongoose": "^4.13.5",
     "path-to-regexp": "^1.7.0",
     "react-cookie": "^1.0.4",
     "restc": "^0.2.1",
