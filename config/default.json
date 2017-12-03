@@ -76,6 +76,6 @@
     "timeout": 25000,
     "publicPath": "/dist/",
     "mockPrefix": "/mock/",
-    "APIPrefix": "http://mock.myscrm.cn/api"
+    "APIPrefix": "https://mock.myscrm.cn/api"
   }
 }
