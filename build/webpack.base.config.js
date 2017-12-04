@@ -19,8 +19,8 @@ fs.writeFileSync(resolve('../views/config.json'), JSON.stringify(config.fe))
 module.exports = {
   devtool: isProd ? false : '#cheap-module-source-map',
   output: {
-    path: resolve('../dist'),
-    publicPath: config.get('fe.publicPath'),
+    path: resolve('../dist/projects/easy-mock'),
+    publicPath: isProd ? '//img.myscrm.cn/dist/projects/easy-mock/' : config.get('fe.publicPath'),
     filename: '[name].[chunkhash].js'
   },
   resolve: {

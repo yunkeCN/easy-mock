@@ -37,8 +37,8 @@ module.exports = function (app) {
   let readyPromise
 
   if (isProd) {
-    const bundle = require('../dist/vue-ssr-server-bundle.json')
-    const clientManifest = require('../dist/vue-ssr-client-manifest.json')
+    const bundle = require('../vue-ssr-server-bundle.json')
+    const clientManifest = require('../../easy-mock/vue-ssr-client-manifest.json')
     renderer = createRenderer(bundle, {
       clientManifest
     })
