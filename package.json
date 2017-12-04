@@ -11,7 +11,7 @@
     "dev:client": "node app | bunyan -o short",
     "dev:server": "cross-env NODE_ENV=production npm run dev",
     "start": "cross-env NODE_ENV=production node app | bunyan -o short",
-    "start-server": "npm run install_dep && pm2 stop app.js || cross-env NODE_ENV=production pm2 start app.js",
+    "start-server": "npm run install_dep && pm2 stop app.js || NODE_ENV=production pm2 start app.js",
     "build": "yarn run install_dep && cross-env NODE_ENV=production yarn run build:dev && echo npm_build_success",
     "build:dev": "rimraf dist && yarn run build:client && yarn run build:server",
     "build:client": "webpack --config build/webpack.client.config.js --progress --hide-modules",
