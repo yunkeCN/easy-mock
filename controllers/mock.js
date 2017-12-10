@@ -9,10 +9,13 @@ const axios = require('axios')
 const config = require('config')
 const qs = require('querystring')
 const pathToRegexp = require('path-to-regexp')
+const faker = require('faker')
 
 const p = require('../proxy')
 const { getParams } = require('../util/mock')
 const ft = require('../models/fields_table')
+
+faker.locale = 'zh_CN'
 
 const projectProxy = p.Project
 const mockProxy = p.Mock
@@ -336,6 +339,16 @@ exports.getMock = function * () {
     options._req.cookies = this.cookies.get.bind(this)
     return options.template.call(options.context.currentContext, options)
   }.bind(this)
+
+  const fakerHelpers = Object.keys(faker).filter(key => ["locales", "locale", "localeFallback", "definitions"].indexOf(key) === -1);
+  fakerHelpers.forEach((help) => {
+    let helpers = faker[help];
+    Object.keys(helpers).forEach((method) => {
+      Mock.Random[`faker.${help}.${method}`] = helpers[method]
+    })
+  })
+
+  // Mock.Random['faker.phone.phoneNumber'] = faker.phone.phoneNumber
 
   if (/^http(s)?/.test(mock.mode)) {
     const proxy = mock.mode.split('?')
