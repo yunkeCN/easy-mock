@@ -340,6 +340,7 @@ exports.getMock = function * () {
     return options.template.call(options.context.currentContext, options)
   }.bind(this)
 
+  // https://github.com/Marak/faker.js
   const fakerHelpers = Object.keys(faker).filter(key => ["locales", "locale", "localeFallback", "definitions"].indexOf(key) === -1);
   fakerHelpers.forEach((help) => {
     let helpers = faker[help];
@@ -348,7 +349,29 @@ exports.getMock = function * () {
     })
   })
 
-  // Mock.Random['faker.phone.phoneNumber'] = faker.phone.phoneNumber
+  function getTime(timeStr = '2017/1/1 0:0:0') {
+    const [year, month = 1, day = 1, hour = 0, minute = 0, second = 0] = timeStr.split(/[\/\-\s:]/);
+    return new Date(year, month - 1, day, hour, minute, second).getTime()
+  }
+
+  // support time stamp, unit: ms
+  Mock.Random.timestampByMs = function (start = '2017/1/1 0:0:0', end) {
+    const startTime = getTime(start);
+
+    let endTime
+    if (typeof end === 'undefined') {
+      endTime = Date.now()
+    } else {
+      endTime = getTime(end)
+    }
+
+    return parseInt((Math.random() * (endTime - startTime) + startTime))
+  }
+
+  // support time stamp, unit: s
+  Mock.Random.timestamp = function (start, end) {
+    return parseInt(Mock.Random.timestampByMs(start, end) / 1000)
+  }
 
   if (/^http(s)?/.test(mock.mode)) {
     const proxy = mock.mode.split('?')
