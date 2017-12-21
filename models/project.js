@@ -23,6 +23,10 @@ const schema = new Schema({
     type: String,
     default: ''
   },
+  swagger_doc_filter: {
+    type: String,
+    default: ''
+  },
   members: [{
     type: Schema.Types.ObjectId,
     ref: 'User',

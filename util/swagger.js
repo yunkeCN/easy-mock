@@ -6,6 +6,7 @@ const _ = require('lodash')
 const path = require('path')
 const Mock = require('mockjs')
 const swaggerParserMock = require('swagger-parser-mock')
+const { VM } = require('vm2')
 
 const flatten = require('./').flatten
 const mockProxy = require('../proxy/mock')
@@ -86,5 +87,25 @@ function createMock (projectId, swaggerDocs) {
 
 exports.create = function (project) {
   return swaggerParserMock(project.swagger_url)
-    .then(docs => createMock(project.id, docs))
+    .then(docs => {
+      const swaggerDocFilter = project.swagger_doc_filter;
+
+      if (swaggerDocFilter) {
+        //customer swagger docs
+        const vm = new VM({
+          timeout: 2000,
+          sandbox: {
+            docs
+          }
+        })
+
+        try {
+          docs = vm.run(`(${swaggerDocFilter})(docs)`)
+        } catch (e) {
+          console.error(e)
+        }
+      }
+
+      createMock(project.id, docs)
+    })
 }

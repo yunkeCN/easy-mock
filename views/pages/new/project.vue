@@ -67,6 +67,8 @@
                 <p>JSON / YML</p>
               </div>
             </Upload>
+            <p>Swagger doc filter</p>
+            <div ref="codeEditor" style="height: 300px"></div>
             <p class="em-new__form-description">
             {{$tc('p.new.form.swagger', 2)}} <router-link to="/docs#swagger"><Icon type="help-circled"></Icon></router-link>
             </p>
@@ -117,6 +119,16 @@
 <script>
 import conf from 'config'
 import * as api from '../../api'
+let ace
+
+if (typeof window !== 'undefined') {
+  ace = require('brace')
+  require('brace/mode/javascript')
+  require('brace/theme/monokai')
+  require('brace/ext/language_tools')
+  require('brace/ext/searchbox')
+  require('../project-detail/snippets')
+}
 
 export default {
   name: 'newProject',
@@ -136,6 +148,7 @@ export default {
         projectUrl: '',
         projectDesc: '',
         projectSwagger: '',
+        projectSwaggerDocFilter: '',
         projectMembers: []
       }
     }
@@ -158,10 +171,12 @@ export default {
       this.form.projectName = proj.name
       this.form.projectDesc = proj.description
       this.form.projectSwagger = proj.swagger_url
+      this.form.projectSwaggerDocFilter = proj.swagger_doc_filter
       this.projectUrl = proj.url.slice(1) // remove /
       this.$nextTick(() => {
         this.remoteLoading = false
         this.form.projectMembers = this.users.map(u => u.value)
+        this.codeEditor.setValue(proj.swagger_doc_filter || '')
       })
       if (proj.group) {
         this.groups = [{ value: proj.group._id, label: proj.group.name }]
@@ -174,6 +189,18 @@ export default {
       this.fetchGroup()
       this.form.groupId = this.user.id
     }
+
+    this.codeEditor = ace.edit(this.$refs.codeEditor)
+    this.codeEditor.getSession().setMode('ace/mode/javascript')
+    this.codeEditor.setTheme('ace/theme/monokai')
+    this.codeEditor.setOption('tabSize', 2)
+    this.codeEditor.setOption('fontSize', 15)
+    this.codeEditor.setOption('enableLiveAutocompletion', true)
+    this.codeEditor.clearSelection()
+    this.codeEditor.getSession().setUseWorker(false)
+    this.codeEditor.on('change', () => {
+      this.form.projectSwaggerDocFilter = this.codeEditor.getValue()
+    })
   },
   computed: {
     user () {
@@ -236,6 +263,7 @@ export default {
         name: this.form.projectName,
         group: this.form.groupId,
         swagger_url: this.form.projectSwagger,
+        swagger_doc_filter: this.form.projectSwaggerDocFilter,
         description: this.form.projectDesc,
         url: this.convertUrl(this.projectUrl),
         members: this.isGroup ? [] : this.form.projectMembers
