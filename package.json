@@ -4,7 +4,7 @@
   "description": "可视化模拟数据生成服务",
   "main": "app.js",
   "scripts": {
-    "set_env": "npm config set registry https://registry.npm.taobao.org && npm config set @yunke:registry https://registry-npm.myscrm.cn/repository/yunke/ && node -e \"process.exit(require('fs').existsSync('./node_modules/@yunke/install')?0:-1)\" || npm i @yunke/install",
+    "set_env": "npm config set registry https://registry.npm.taobao.org && npm config set @yunke:registry https://registry-npm.myscrm.cn/repository/yunke/",
     "install_dep": "yarn set_env && yarn --frozen-lockfile --check-files",
     "test": "cross-env NODE_ENV=test istanbul cover _mocha test/*",
     "lint": "eslint --ignore-path .gitignore . --quiet --ext .vue,.js",
@@ -26,7 +26,6 @@
   ],
   "dependencies": {
     "@tweenjs/tween.js": "^17.1.0",
-    "@yunke/install": "^2.0.1",
     "axios": "^0.15.3",
     "bcryptjs": "^2.4.3",
     "brace": "^0.10.0",
