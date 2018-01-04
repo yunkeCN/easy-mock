@@ -6,6 +6,14 @@
   version "17.1.0"
   resolved "https://registry.yarnpkg.com/@tweenjs/tween.js/-/tween.js-17.1.0.tgz#87e889dfd57a6ecbcf54401938c0422e80b87306"
 
+"@yunke/server-scripts@^1.3.3":
+  version "1.3.3"
+  resolved "https://registry-npm.myscrm.cn/repository/yunke/@yunke/server-scripts/-/server-scripts-1.3.3.tgz#e57a006c004a081519cbce1b74ee45797f37b45b"
+  dependencies:
+    commander "^2.11.0"
+    cross-spawn "^5.1.0"
+    pm2 "^2.5.0"
+
 abab@^1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.3.tgz#b81de5f7274ec4e756d797cd834f303642724e5d"
@@ -1469,6 +1477,10 @@ combined-stream@^1.0.5, combined-stream@~1.0.5:
 commander@*, commander@2.11.0, commander@^2.11.0, commander@^2.7.1, commander@^2.9.0:
   version "2.11.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.11.0.tgz#157152fd1e7a6c8d98a5b715cf376df928004563"
+
+commander@2.12.2:
+  version "2.12.2"
+  resolved "http://registry.npm.taobao.org/commander/download/commander-2.12.2.tgz#0f5946c427ed9ec0d91a46bb9def53e54650e555"
 
 commander@2.9.0:
   version "2.9.0"
@@ -4372,6 +4384,10 @@ moment@^2.10.6, moment@^2.17.1:
   version "2.18.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
 
+moment@^2.19:
+  version "2.20.1"
+  resolved "http://registry.npm.taobao.org/moment/download/moment-2.20.1.tgz#d6eb1a46cbcc14a2b2f9434112c1ff8907f313fd"
+
 mongodb-core@2.1.15:
   version "2.1.15"
   resolved "https://registry.yarnpkg.com/mongodb-core/-/mongodb-core-2.1.15.tgz#841f53b87ffff4c7458189c35c8ae827e1169764"
@@ -4917,7 +4933,7 @@ performance-now@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-0.2.0.tgz#33ef30c5c77d4ea21c5a53869d91b56d8f2555e5"
 
-pidusage@^1.1.0:
+pidusage@^1.1.0, pidusage@^1.2.0:
   version "1.2.0"
   resolved "http://registry.npm.taobao.org/pidusage/download/pidusage-1.2.0.tgz#65ee96ace4e08a4cd3f9240996c85b367171ee92"
 
@@ -4982,7 +4998,7 @@ pm2-axon@3.1.0:
     debug "^3.0"
     escape-regexp "0.0.1"
 
-pm2-deploy@^0.3.8:
+pm2-deploy@^0.3.8, pm2-deploy@^0.3.9:
   version "0.3.9"
   resolved "http://registry.npm.taobao.org/pm2-deploy/download/pm2-deploy-0.3.9.tgz#adeee775c56d52b8f251ba9b0abe0db50a01dfc7"
   dependencies:
@@ -4994,6 +5010,40 @@ pm2-multimeter@^0.1.2:
   resolved "http://registry.npm.taobao.org/pm2-multimeter/download/pm2-multimeter-0.1.2.tgz#1a1e55153d41a05534cea23cfe860abaa0eb4ace"
   dependencies:
     charm "~0.1.1"
+
+pm2@^2.5.0:
+  version "2.9.1"
+  resolved "http://registry.npm.taobao.org/pm2/download/pm2-2.9.1.tgz#1da402931be80f87208bd3fb50bc2cfa7d486335"
+  dependencies:
+    async "^2.5"
+    blessed "^0.1.81"
+    chalk "^1.1"
+    chokidar "^1.7"
+    cli-table-redemption "^1.0.0"
+    commander "2.12.2"
+    cron "^1.3"
+    debug "^3.0"
+    eventemitter2 "1.0.5"
+    fclone "1.0.11"
+    mkdirp "0.5.1"
+    moment "^2.19"
+    needle "1.6.0"
+    nssocket "0.6.0"
+    pidusage "^1.2.0"
+    pm2-axon "3.1.0"
+    pm2-axon-rpc "0.5.0"
+    pm2-deploy "^0.3.9"
+    pm2-multimeter "^0.1.2"
+    pmx "^1.5"
+    promptly "2.2.0"
+    semver "^5.3"
+    shelljs "0.7.8"
+    source-map-support "^0.5"
+    sprintf-js "1.1.1"
+    vizion "^0.2"
+    yamljs "^0.3.0"
+  optionalDependencies:
+    gkt "https://tgz.pm2.io/gkt-1.0.0.tgz"
 
 pm2@^2.8.0:
   version "2.8.0"
@@ -7330,7 +7380,7 @@ yallist@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-2.1.2.tgz#1c11f9218f076089a47dd512f93c6699a6a81d52"
 
-yamljs@0.3.0:
+yamljs@0.3.0, yamljs@^0.3.0:
   version "0.3.0"
   resolved "http://registry.npm.taobao.org/yamljs/download/yamljs-0.3.0.tgz#dc060bf267447b39f7304e9b2bfbe8b5a7ddb03b"
   dependencies:
